@@ -133,4 +133,11 @@ private:
 
         renormalisation_bias += absolute_error_t(min);
     }
+
+    template <typename T>
+    inline
+    T abs(T x) {
+        return (x > 0) ? x : -x;
+    }
+
 };

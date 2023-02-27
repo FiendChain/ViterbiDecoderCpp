@@ -6,8 +6,9 @@
 
 #include "viterbi/convolutional_encoder_lookup.h"
 #include "viterbi/viterbi_decoder_scalar.h"
-#include "viterbi/viterbi_decoder_sse_u16.h"
-#include "viterbi/viterbi_decoder_avx_u16.h"
+#include "viterbi/viterbi_decoder_arm_u16.h"
+// #include "viterbi/viterbi_decoder_sse_u16.h"
+// #include "viterbi/viterbi_decoder_avx_u16.h"
 
 #include "test_helpers.h"
 
@@ -63,8 +64,9 @@ int main(int argc, char** argv) {
     rx_input_bytes.resize(total_input_bytes);
     auto branch_table = ViterbiBranchTable<K,R,int16_t>(G, soft_decision_high, soft_decision_low);
     // NOTE: Up to you to choose which level of vectorisation to use
-    auto vitdec = ViterbiDecoder_AVX_u16<K,R>(branch_table, decoder_config);
+    // auto vitdec = ViterbiDecoder_AVX_u16<K,R>(branch_table, decoder_config);
     // auto vitdec = ViterbiDecoder_SSE_u16<K,R>(branch_table, decoder_config);
+    auto vitdec = ViterbiDecoder_ARM_u16<K,R>(branch_table, decoder_config);
     // auto vitdec = ViterbiDecoder_Scalar<K,R,uint16_t,int16_t>(branch_table, decoder_config);
     vitdec.set_traceback_length(total_input_bits);
     vitdec.reset();

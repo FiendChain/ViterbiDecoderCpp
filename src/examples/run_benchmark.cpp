@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
     bool is_show_list = false;
     const char* mode_str = NULL;
 
-	int opt; 
+    int opt;
     while ((opt = getopt_custom(argc, argv, "c:M:n:s:L:T:lh")) != -1) {
         switch (opt) {
         case 'c':
@@ -365,20 +365,20 @@ void init_test(
         printf("\n");
     }
 
-    if constexpr(factory_t<K,R>::SIMD_AVX::is_valid) {
-        auto vitdec = typename factory_t<K,R>::SIMD_AVX(branch_table, config.decoder_config);
-        vitdec.set_traceback_length(total_input_bits);
-        const auto res = run_test(
-            vitdec, 
-            output_symbols.data(), output_symbols.size(), 
-            tx_input_bytes.data(), rx_input_bytes.data(), total_input_bytes,
-            total_runs
-        );
+    /* if constexpr(factory_t<K,R>::SIMD_AVX::is_valid) { */
+    /*     auto vitdec = typename factory_t<K,R>::SIMD_AVX(branch_table, config.decoder_config); */
+    /*     vitdec.set_traceback_length(total_input_bits); */
+    /*     const auto res = run_test( */
+    /*         vitdec, */ 
+    /*         output_symbols.data(), output_symbols.size(), */ 
+    /*         tx_input_bytes.data(), rx_input_bytes.data(), total_input_bytes, */
+    /*         total_runs */
+    /*     ); */
 
-        printf("> SIMD_AVX results\n");
-        print_comparison(test_ref, res);
-        printf("\n");
-    }
+    /*     printf("> SIMD_AVX results\n"); */
+    /*     print_comparison(test_ref, res); */
+    /*     printf("\n"); */
+    /* } */
 }
 
 template <typename soft_t, class T>

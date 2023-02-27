@@ -38,9 +38,10 @@ enum DecodeType {
 template <class decoder_factory_t>
 constexpr 
 DecodeType get_fastest_decode_type() {
-    if constexpr(decoder_factory_t::SIMD_AVX::is_valid) {
-        return DecodeType::SIMD_AVX;
-    } else if constexpr(decoder_factory_t::SIMD_SSE::is_valid) {
+    /* if constexpr(decoder_factory_t::SIMD_AVX::is_valid) { */
+    /*     return DecodeType::SIMD_AVX; */
+    /* } else if constexpr(decoder_factory_t::SIMD_SSE::is_valid) { */
+    if constexpr(decoder_factory_t::SIMD_SSE::is_valid) {
         return DecodeType::SIMD_SSE;
     } else if constexpr(decoder_factory_t::Scalar::is_valid) {
         return DecodeType::SCALAR;
